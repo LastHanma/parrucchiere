@@ -1,0 +1,54 @@
+.form__section{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    /* border: 3px solid yellow; */
+}
+.form{
+    background-color: rgb(189, 27, 149);
+    padding: 1rem;
+    /* flex-grow: 2; */
+    border-radius: 8px;
+    
+}
+.contenuto{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* width: 70%; */
+    /* border: 3px solid blue; */
+}
+.input-box,.scelta-servizio{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 0.5rem;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+    /* border: 3px solid black; */
+}
+
+.btn-box{
+    /* border: 3px solid blue; */
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: end;
+}
+.invio-btn{
+    background-color: white;
+    color: rgb(189, 27, 149);
+    width: 100px;
+    padding: 0.3rem;
+    border: none;
+    /* border-radius: 5px; */
+}
+.div{
+    background-color: white;
+    border: 3px solid rgb(163, 22, 22);
+    flex-grow: 2;
+}

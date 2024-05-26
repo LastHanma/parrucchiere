@@ -1,0 +1,47 @@
+*,*::before,*::after{
+    box-sizing: border-box;
+}
+*{
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color:rgb(10,10,10);
+    color: white;
+    height: 100vh;
+}
+button{
+    border: none;
+    background:none;
+    color:inherit;
+    font-family: inherit;
+}
+a{
+    color:white;
+    text-decoration: none;
+}
+input,select,option{
+    outline: none;
+    width: 50%;
+    /* height: 50px; */
+    /* border-radius: 5px; */
+    padding: 0.5rem;
+    /* border: 3px solid red; */
+    
+    
+}
+
+
+
+button{
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: inherit;
+    font-family: inherit;
+}
