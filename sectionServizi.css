@@ -46,7 +46,7 @@
 }
 .btn:hover{
     background-color: rgb(10,10,10);
-    color: white;
+    color: white !important;
     transition: all 0.5s ease;
     
 }
