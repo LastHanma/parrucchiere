@@ -9,15 +9,10 @@
     .header__title{
         font-size: 1.8rem;
     }
-    .show{
-        display: none;
-        /* font-size: 0.6rem; */
+    ul{
+        margin-left: 1rem;
     }
-    .menu-bar{
-        display: block;
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
+    
     .info__title{
         font-size: 1.2rem;
     }
@@ -28,14 +23,7 @@
         width: 70px;
         font-size: 0.5rem;
     }
-    .menu.show .menu__link{
-        background-color: rgb(1, 1, 1);
-        color: rgb(255, 255, 255);
-        width: 100px;
-        padding: 0.5rem;
-        text-align: center;
-        border-radius: 5px;
-    }
+    
     .menu.show .menu__link:hover{
         text-decoration: underline;
         text-decoration-color:rgb(189, 27, 149);
@@ -118,19 +106,8 @@
         font-size: 2.5rem;
         margin-left: 2.5rem;
     }
-    .menu{
-        display: flex;
-        font-size: 1rem;
-        justify-content: end;
-        gap: 1rem;
-        flex-grow:1;
-        margin-right: 2.5rem;
-        /* font-size: 1.1rem; */
-        /* border: 3px solid blue; */
-    }
-    .menu__link{
-        background: none;
-        color: white;
+    ul{
+        margin-left: 3rem;
     }
     .menu__link:hover{
         background:none;

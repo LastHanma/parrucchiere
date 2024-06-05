@@ -1,0 +1,77 @@
+header{
+    margin-right: 0.5rem;
+    /*border: 3px solid red;*/
+    
+}
+
+.navbar-toggler{
+    color:white;
+    margin-right: 0.5rem;
+
+}
+.navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255, 255, 255, 1)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
+  }
+
+.collasato{
+    flex-grow: 0;
+    
+}  
+.header__title{
+    font-size: 3rem;
+    margin-left: 0.5rem;
+    /* border: 3px solid green; */
+    flex-grow:1;
+    font-weight: bold;
+}
+
+ul{
+    margin-left: 3rem;
+}
+.nav-link{
+    color:inherit;
+}
+.menu__link:hover{
+    text-decoration: underline;
+    text-decoration-thickness: 0.2rem;
+    text-decoration-color:rgb(189, 27, 149);
+    color: darkgrey;
+    
+}
+
+
+.info{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    
+}
+.info__title{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+
+}
+.info_paragraph1{
+    max-width: 60ch;
+    font-size: 1rem;
+    /* border: 3px solid yellow; */
+    margin: 0 auto;
+
+}
+.info-btn{
+    padding: 0.5rem;
+    background-color: rgb(189, 27, 149);
+    width: 200px;
+    font-size: inherit;
+    /* font-weight: bold; */
+    color: white;
+    cursor: pointer;
+}
+.info-btn:hover{
+    color: rgb(189, 27, 149);
+    background-color: white;
+    transition: all 0.5s ease;
+}

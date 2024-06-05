@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    const menuToggle = document.getElementById("menu-bar");
+    /*const menuToggle = document.getElementById("menu-bar");
     const menu = document.getElementById("menu");
     const exitMenu = document.getElementById("exit-menu");
 
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
         menu.classList.remove("show");
         exitMenu.classList.remove("show");
         toggleBodyOverflow(); // Chiama la funzione per cambiare l'overflow del body
-    });
+    });*/
 
     flatpickr('#giornata', {
         enableTime: true,
