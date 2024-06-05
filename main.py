@@ -1,10 +1,12 @@
-from fastapi import FastAPI
-import mysql.connector
+from fastapi import FastAPI, Depends, HTTPException
+from fastapi.security import OAuth2PasswordRequestForm
+from fastapi_login import LoginManager
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import mysql.connector
 import bcrypt
 from datetime import datetime, time
-# per evitare errori di CORS
-from fastapi.middleware.cors import CORSMiddleware
+import os
 
 app = FastAPI()
 
@@ -15,6 +17,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+SECRET = os.getenv("SECRET_KEY", "nextGenBest")
+manager = LoginManager(SECRET, token_url="/api/v1/login", use_cookie=True)
+manager.cookie_name = "auth_token"
 
 class RegistrazioneUtente(BaseModel):
     username: str
@@ -43,10 +49,9 @@ class Messaggio(BaseModel):
 
 class messaggio_Prenotazione(BaseModel):
     msg: str
-    id_prenotazione:int  # Rendi opzionale per il login
-    status:bool=False
+    id_prenotazione: int  # Rendi opzionale per il login
+    status: bool = False
 
-# file di configurazione per connessione
 config = {
     "user": "root",
     # "password": "",
@@ -68,7 +73,7 @@ def recupera_utenti():
     finally:
         cursore.close()
         connessione.close()
-    
+
     return utenti
 
 @app.get("/api/v1/users/{email}")
@@ -81,7 +86,7 @@ def user(email: str):
     finally:
         cursore.close()
         connessione.close()
-    
+
     if user:
         return user
     else:
@@ -90,7 +95,7 @@ def user(email: str):
 @app.post("/api/v1/registrazione", response_model=Messaggio)
 def registrazione(utente: RegistrazioneUtente):
     hashed_password = bcrypt.hashpw(utente.pwd.encode('utf-8'), bcrypt.gensalt())
-    
+
     try:
         connessione = mysql.connector.connect(**config)
         cursore = connessione.cursor()
@@ -112,44 +117,38 @@ def registrazione(utente: RegistrazioneUtente):
     finally:
         cursore.close()
         connessione.close()
-    
+
     return {"msg": "Utente inserito correttamente!", "id_utente": id_utente}
 
-@app.post("/api/v1/login")
-def login(utente: LoginUtente):
+@manager.user_loader()
+def get_user(email: str):
     try:
         connessione = mysql.connector.connect(**config)
         cursore = connessione.cursor(dictionary=True)
-        query = "SELECT nome, cognome, username, email, pwd FROM utenti WHERE email = %s"
-        parametro = (utente.email,)
-        cursore.execute(query, parametro)
+        cursore.execute("SELECT * FROM utenti WHERE email=%s", (email,))
         user = cursore.fetchone()
     finally:
         cursore.close()
         connessione.close()
     
-    if user:
-        stored_hashed_password = user["pwd"]
-        if bcrypt.checkpw(utente.pwd.encode('utf-8'), stored_hashed_password.encode('utf-8')):
-            user["nome"] = user["nome"]
-            user["cognome"] = user["cognome"]
-            user["username"] = user["username"]
-            user["pwd"] = utente.pwd
-            return {
-                "msg": "Login eseguito con successo!",
-                "login_status": True,
-                "utente": user
-            }
-        else:
-            return {
-                "msg": "Password errata!",
-                "login_status": False
-            }
-    else:
-        return {
-            "msg": "Nessun utente trovato con quella email!",
-            "login_status": False
-        }
+    return user
+
+@app.post("/api/v1/login")
+def login(data: OAuth2PasswordRequestForm = Depends()):
+    email = data.username
+    pwd = data.password
+    user = get_user(email)
+    if not user:
+        raise HTTPException(status_code=400, detail="Invalid email or password")
+    if not bcrypt.checkpw(pwd.encode('utf-8'), user["pwd"].encode('utf-8')):
+        raise HTTPException(status_code=400, detail="Invalid email or password")
+    
+    access_token = manager.create_access_token(
+        data={"sub": email}
+    )
+    response = {"msg": "Login eseguito con successo!", "login_status": True}
+    manager.set_cookie(response, access_token)
+    return response
 
 @app.post("/api/v1/inserimento_prenotazione", response_model=messaggio_Prenotazione)
 def prenotazione(prenotazione: Appuntamento):
@@ -187,5 +186,3 @@ def prenotazione(prenotazione: Appuntamento):
     finally:
         cursore.close()
         connessione.close()
-    
-   
