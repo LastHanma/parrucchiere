@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ricerca Appuntamenti</title>
+  </head>
+  <body>
+    <h1>Ricerca Appuntamenti</h1>
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Inserisci il servizio..."
+    />
+    <button onclick="searchAppointments()">Cerca</button>
+    <div id="results"></div>
+
+    <script>
+      async function searchAppointments() {
+        var searchInput = document.getElementById("searchInput").value;
+        var email = "sasukeuchiha@gmail.com"; // Ottieni l'email dall'archivio locale
+        var url = `http://127.0.0.1:8000/api/v1/users/appuntamenti/${encodeURIComponent(
+          searchInput
+        )}/${encodeURIComponent(email)}`;
+
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          displayResults(data);
+        } catch (error) {
+          console.error("Errore durante la ricerca degli appuntamenti:", error);
+        }
+      }
+
+      function displayResults(data) {
+        var resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = ""; // Pulisce i risultati precedenti
+
+        if (Object.keys(data).length === 0) {
+          resultsDiv.innerHTML =
+            "<p>Nessun appuntamento trovato per questo servizio.</p>";
+        } else {
+          var tableHTML =
+            "<table><tr><th>ID Appuntamento</th><th>Nome</th><th>Cognome</th><th>Email</th><th>Telefono</th><th>Servizio</th><th>Data</th><th>Ora</th></tr>";
+
+          for (var id in data) {
+            var appointment = data[id];
+            tableHTML += `<tr>
+                            <td>${appointment.id_appuntamento}</td>
+                            <td>${appointment.nome}</td>
+                            <td>${appointment.cognome}</td>
+                            <td>${appointment.email}</td>
+                            <td>${appointment.telefono}</td>
+                            <td>${appointment.servizio}</td>
+                            <td>${appointment.data_appuntamento}</td>
+                            <td>${appointment.ora_appuntamento}</td>
+                        </tr>`;
+          }
+
+          tableHTML += "</table>";
+          resultsDiv.innerHTML = tableHTML;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -113,9 +113,7 @@
         background:none;
         text-decoration-color: rgb(189, 27, 149);
     }
-    .menu-bar{
-        display: none;
-    }
+    
     .info__title{
         font-size: 1.5rem;
     }

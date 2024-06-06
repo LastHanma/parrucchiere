@@ -65,7 +65,7 @@
           <div class="collapse navbar-collapse justify-content-end" id="menu">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" href="form-barber.php">Prenota</a>
+                <a class="nav-link" href="form-barber.html">Prenota</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="">Info</a>
@@ -239,8 +239,8 @@
               email: email,
               telefono: telefono,
               servizio: servizio,
-              data: data,
-              ora: orario,
+              data_appuntamento: data,
+              ora_appuntamento: orario,
             }),
           }
         );
@@ -263,7 +263,7 @@
       `;
           setTimeout(() => {
             localStorage.setItem("utenti", JSON.stringify(risposta.utente));
-            window.location.href = "barberSite.html";
+            window.location.href = "form.html";
           }, 500);
         }
       } catch (error) {

@@ -5,6 +5,7 @@ import bcrypt
 from datetime import datetime, time
 # per evitare errori di CORS
 from fastapi.middleware.cors import CORSMiddleware
+from typing import Optional
 
 app = FastAPI()
 
@@ -34,8 +35,9 @@ class Appuntamento(BaseModel):
     email: str
     telefono: str
     servizio: str
-    data: datetime
-    ora: time
+    data_appuntamento: datetime
+    ora_appuntamento: time
+    id_utente: Optional[int] = None
 
 class Messaggio(BaseModel):
     msg: str
@@ -161,14 +163,14 @@ def prenotazione(prenotazione: Appuntamento):
         VALUES (%s, %s, %s, %s, %s, %s, %s)
         """
         # Converte ora nel formato corretto
-        ora_formattata = prenotazione.ora.strftime('%H:%M:%S')
+        ora_formattata = prenotazione.ora_appuntamento.strftime('%H:%M:%S')
         parametri = (
             prenotazione.nome,
             prenotazione.cognome,
             prenotazione.email,
             prenotazione.telefono,
             prenotazione.servizio,
-            prenotazione.data.strftime('%Y-%m-%d'),  # Converte data nel formato corretto
+            prenotazione.data_appuntamento.strftime('%Y-%m-%d'),  # Converte data nel formato corretto
             ora_formattata
         )
         cursore.execute(query, parametri)
@@ -188,4 +190,23 @@ def prenotazione(prenotazione: Appuntamento):
         cursore.close()
         connessione.close()
     
-   
+
+@app.get("/api/v1/users/appuntamenti/{servizio}/{email}")
+def ricercaAppuntamenti(email:str,servizio:str):
+    try:
+        connessione = mysql.connector.connect(**config)
+        cursore = connessione.cursor(dictionary=True)
+        cursore.execute("SELECT id_appuntamento,nome,cognome,email,telefono,servizio,data_appuntamento, DATE_FORMAT(ora_appuntamento, '%H:%i') AS ora_appuntamento FROM appuntamenti WHERE servizio=%s AND email=%s",(servizio,email,))
+        risultati=cursore.fetchall()
+        
+        # Stampa di debug per verificare i risultati della query
+        print(f"Risultati della query: {risultati}")
+        
+        if risultati:
+            return risultati
+    
+    except Exception as e:
+        return{"Errore durante la ricerca degli appuntamenti"}
+    finally:
+        cursore.close()
+        connessione.close()
