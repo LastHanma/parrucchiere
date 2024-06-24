@@ -7,7 +7,7 @@
 }
 @media (min-width:320px){
     .header__title{
-        font-size: 1.8rem;
+        font-size: 1.65rem;
     }
     ul{
         margin-left: 1rem;
@@ -23,7 +23,9 @@
         width: 70px;
         font-size: 0.5rem;
     }
-    
+    .form__section{
+        flex-wrap: wrap;
+    }
     .menu.show .menu__link:hover{
         text-decoration: underline;
         text-decoration-color:rgb(189, 27, 149);
@@ -108,6 +110,9 @@
     }
     ul{
         margin-left: 3rem;
+    }
+    .form__section{
+        flex-wrap: nowrap;
     }
     .menu__link:hover{
         background:none;

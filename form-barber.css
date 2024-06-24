@@ -1,13 +1,20 @@
+#map {
+    height: 400px;
+    width: 100%;
+    /*border: 3px solid blue;*/
+  }
 .form__section{
+    /*border: 3px solid red;*/
     display: flex;
     justify-content: center;
     gap: 1rem;
     /* border: 3px solid yellow; */
 }
+
 .form{
+    /*border: 3px solid green;*/
     background-color: rgb(189, 27, 149);
     padding: 1rem;
-    /* flex-grow: 2; */
     border-radius: 8px;
     
 }
