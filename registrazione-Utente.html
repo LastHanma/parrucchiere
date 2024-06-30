@@ -32,17 +32,15 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 100vh;
         font-family: "Poppins", sans-serif;
         background-color: rgb(10, 10, 10);
         color: white;
-        height: 100vh;
       }
 
       .logo_title {
         font-size: 4.5rem;
         margin-left: 0.5rem;
-        margin-bottom: 4rem;
+
         /* border: 3px solid green; */
         font-weight: bold;
       }
@@ -56,7 +54,6 @@
       .contenitore_form {
         min-width: 50%;
       }
-
       .alert {
         padding: 0.5rem;
       }
@@ -64,73 +61,80 @@
   </head>
 
   <body>
-    <h1 class="logo_title text-center">Tony's & Remo's</h1>
-    <div class="contenitore_form mx-auto">
-      <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          id="username"
-          name="username"
-          aria-describedby=""
-        />
-      </div>
-      <div class="mb-3">
-        <label for="nome" class="form-label">Nome</label>
-        <input
-          type="text"
-          class="form-control"
-          id="nome"
-          name="nome"
-          aria-describedby=""
-        />
-      </div>
-      <div class="mb-3">
-        <label for="cognome" class="form-label">Cognome</label>
-        <input
-          type="text"
-          class="form-control"
-          id="cognome"
-          name="cognome"
-          aria-describedby=""
-        />
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          name="email"
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="telefono" class="form-label">Telefono</label>
-        <input
-          type="tel"
-          class="form-control"
-          id="telefono"
-          name="telefono"
-          aria-describedby=""
-        />
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="pwd" />
-      </div>
-      <div class="mb-3">
-        <a href="login-Utente.php">Hai già un account?clicca qui</a>
-      </div>
-      <div class="mb-3 d-flex justify-content-end">
-        <button
-          id="btn"
-          class="btn btn-primary w-100"
-          onclick="registrazione()"
-        >
-          Registrati
-        </button>
+    <div class="contenitore">
+      <h1 class="logo_title text-center">Tony's & Remo's</h1>
+      <div class="contenitore_form mx-auto">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            aria-describedby=""
+          />
+        </div>
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nome"
+            name="nome"
+            aria-describedby=""
+          />
+        </div>
+        <div class="mb-3">
+          <label for="cognome" class="form-label">Cognome</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cognome"
+            name="cognome"
+            aria-describedby=""
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="telefono" class="form-label">Telefono</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="telefono"
+            name="telefono"
+            aria-describedby=""
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="pwd"
+          />
+        </div>
+        <div class="mb-3">
+          <a href="login-Utente.php">Hai già un account?clicca qui</a>
+        </div>
+        <div class="mb-3 d-flex justify-content-end">
+          <button
+            id="btn"
+            class="btn btn-primary w-100"
+            onclick="registrazione()"
+          >
+            Registrati
+          </button>
+        </div>
       </div>
     </div>
     <div id="risposta"></div>
