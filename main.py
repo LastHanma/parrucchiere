@@ -45,7 +45,8 @@ class Appuntamento(BaseModel):
 
 class Messaggio(BaseModel):
     msg: str
-    id_utente: int  # Rendi opzionale per il login
+    id_utente: Optional[int] = None  # Reso opzionale 
+    status:bool=False
 
 class messaggio_Prenotazione(BaseModel):
     msg: str
@@ -220,7 +221,7 @@ def registrazione(utente: RegistrazioneUtente):
         cursore.close()
         connessione.close()
     
-    return {"msg": "Utente inserito correttamente!", "id_utente": id_utente}
+    return {"msg": "Registrazione eseguita con successo!","id_utente":id_utente,"status":True}
 
 @app.post("/api/v1/login")
 def login(utente: LoginUtente):
