@@ -78,4 +78,7 @@ ul{
 #account-link {
     display: none;
   }
+  #registrazione-link,#login-link{
+    display: block;
+  }
   

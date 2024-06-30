@@ -65,6 +65,14 @@
                 >Account</a
               >
             </li>
+            <li class="nav-item" id="registrazione-link">
+              <a class="nav-link menu__link" href="registrazione-Utente.html"
+                >Registrazione</a
+              >
+            </li>
+            <li class="nav-item" id="login-link">
+              <a class="nav-link menu__link" href="login-Utente.html">Login</a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -243,10 +251,14 @@
       // Controlla se l'oggetto utente è presente nel localStorage
       const user = localStorage.getItem("utenti");
       const accountLink = document.getElementById("account-link");
+      const registrazioneLink = document.getElementById("registrazione-link");
+      const loginLink = document.getElementById("login-link");
 
       if (user) {
         // Se l'utente è presente, mostra la sezione account
         accountLink.style.display = "block";
+        registrazioneLink.style.display = "none";
+        loginLink.style.display = "none";
       } else {
         // Se l'utente non è presente, nascondi la sezione account
         accountLink.style.display = "none";
