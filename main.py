@@ -16,9 +16,9 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5500"],
+    allow_origins=["http://127.0.0.1:5500"],  # Cambia con l'origine del tuo frontend
     allow_credentials=True,
-    allow_methods=["POST"],  # Specifica i metodi che desideri consentire (es. solo POST)
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 class RegistrazioneUtente(BaseModel):
