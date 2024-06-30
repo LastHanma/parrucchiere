@@ -16,7 +16,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Cambia con l'origine del tuo frontend
+    allow_origins=["*"],  # Cambia con l'origine del  frontend
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
