@@ -172,7 +172,17 @@
         );
 
         const risposta = await request.json();
-        if (risposta.status == true) {
+        if (risposta.status != true) {
+          document.getElementById(
+            "risposta"
+          ).innerHTML = `<div class="alert alert-danger" role="alert">
+                ${risposta.msg}
+            </div>
+          `;
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
+        } else {
           document.getElementById(
             "risposta"
           ).innerHTML = `<div class="alert alert-success" role="alert">
