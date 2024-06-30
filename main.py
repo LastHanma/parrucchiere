@@ -194,7 +194,7 @@ def user(email: str):
 
 @app.post("/api/v1/registrazione")
 def registrazione(utente: RegistrazioneUtente):
-    
+    hashed_password = bcrypt.hashpw(utente.pwd.encode('utf-8'), bcrypt.gensalt())
     try:
         # Connessione al database
         connessione = mysql.connector.connect(**config)
@@ -219,7 +219,7 @@ def registrazione(utente: RegistrazioneUtente):
             utente.cognome,
             utente.email,
             utente.telefono,
-            utente.pwd
+            hashed_password
         )
         cursore.execute(query_insert_user, parametri)
         connessione.commit()
