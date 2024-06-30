@@ -60,7 +60,7 @@
             <li class="nav-item">
               <a class="nav-link menu__link" href="">Contatti</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="account-link">
               <a class="nav-link menu__link" href="account-Utente.html"
                 >Account</a
               >
@@ -238,4 +238,19 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="barber-js.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Controlla se l'oggetto utente è presente nel localStorage
+      const user = localStorage.getItem("utente");
+      const accountLink = document.getElementById("account-link");
+
+      if (user) {
+        // Se l'utente è presente, mostra la sezione account
+        accountLink.style.display = "block";
+      } else {
+        // Se l'utente non è presente, nascondi la sezione account
+        accountLink.style.display = "none";
+      }
+    });
+  </script>
 </html>

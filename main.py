@@ -86,20 +86,25 @@ def send_styled_email(sender_email, sender_password, receiver_email, subject, ap
                 box-shadow: 0 0 10px rgba(0,0,0,0.1);
             }}
             .header {{
-                background-color: #007bff;
-                color: #ffffff;
+                background-color: rgb(189, 27, 149);
+                color: white;
                 text-align: center;
                 padding: 10px;
                 border-top-left-radius: 8px;
                 border-top-right-radius: 8px;
             }}
+            .title{{
+                font-size:1.75rem;
+            }}
             .content {{
+                background-color: black;
+                color: white;
                 padding: 20px;
             }}
             .footer {{
                 text-align: center;
                 padding: 10px;
-                background-color: #343a40;
+                background-color: black;
                 color: #ffffff;
                 border-bottom-left-radius: 8px;
                 border-bottom-right-radius: 8px;
@@ -109,7 +114,7 @@ def send_styled_email(sender_email, sender_password, receiver_email, subject, ap
     <body>
         <div class="container">
             <div class="header">
-                <h1>{subject}</h1>
+                <h1 class="title">{subject}</h1>
             </div>
             <div class="content">
                 <p>Gentile {appuntamento.nome} {appuntamento.cognome},</p>
@@ -259,7 +264,7 @@ def prenotazione(prenotazione: Appuntamento):
     sender_email = 'tonyremosbarbiere@gmail.com'
     sender_password = 'brlgttzzcaguhbum'  #  la password per l'app generata
     receiver_email = prenotazione.email
-    subject = 'Prenotazione-Tony & Remo/s'
+    subject = "Prenotazione-Tony & Remo's"
     try:
         connessione = mysql.connector.connect(**config)
         cursore = connessione.cursor()

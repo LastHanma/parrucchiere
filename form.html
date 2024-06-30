@@ -206,8 +206,27 @@
             </div>
           </div>
         </div>
+        <!-- Bootstrap Toast per il messaggio di successo -->
+        <div
+          class="toast align-items-center text-white bg-success"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          id="success-toast"
+        >
+          <div class="d-flex">
+            <div class="toast-body">Prenotazione eseguita con successo!</div>
+            <button
+              type="button"
+              class="btn-close me-2 m-auto"
+              data-bs-dismiss="toast"
+              aria-label="Close"
+            ></button>
+          </div>
+        </div>
+        <div id="risposta"></div>
       </div>
-      <div id="risposta"></div>
+
       <div class="container-mappa">
         <div id="map"></div>
         <div class="location-info">
@@ -324,6 +343,10 @@
                   ${risposta.msg}
               </div>
       `;
+          // Mostra il toast di Bootstrap per il messaggio di successo
+          let toastEl = document.getElementById("success-toast");
+          let toast = new bootstrap.Toast(toastEl);
+          toast.show();
           setTimeout(() => {
             localStorage.setItem("utenti", JSON.stringify(risposta.utente));
             window.location.href = "form.html";
