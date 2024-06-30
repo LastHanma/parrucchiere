@@ -179,6 +179,7 @@
             </div>
           `;
         setTimeout(() => {
+          localStorage.setItem("utenti", JSON.stringify(risposta.utente));
           window.location.href = "index.html";
         }, 500);
       } catch (error) {
