@@ -197,7 +197,6 @@ def user(email: str):
 
 @app.post("/api/v1/registrazione", response_model=Messaggio)
 def registrazione(utente: RegistrazioneUtente):
-    hashed_password = bcrypt.hashpw(utente.pwd.encode('utf-8'), bcrypt.gensalt())
     
     try:
         # Connessione al database
