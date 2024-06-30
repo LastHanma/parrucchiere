@@ -43,10 +43,7 @@ class Appuntamento(BaseModel):
     ora_appuntamento: time
     id_utente: Optional[int] = None
 
-class Messaggio(BaseModel):
-    msg: str
-    id_utente: Optional[int] = None  # Reso opzionale 
-    status:bool=False
+
 
 class messaggio_Prenotazione(BaseModel):
     msg: str
@@ -195,7 +192,7 @@ def user(email: str):
     else:
         return {"msg": "Utente non trovato"}
 
-@app.post("/api/v1/registrazione", response_model=Messaggio)
+@app.post("/api/v1/registrazione")
 def registrazione(utente: RegistrazioneUtente):
     
     try:
