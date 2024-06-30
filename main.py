@@ -200,28 +200,47 @@ def registrazione(utente: RegistrazioneUtente):
     hashed_password = bcrypt.hashpw(utente.pwd.encode('utf-8'), bcrypt.gensalt())
     
     try:
+        # Connessione al database
         connessione = mysql.connector.connect(**config)
-        cursore = connessione.cursor()
-        query = """
-        INSERT INTO utenti (username, nome, cognome, email, telefono, pwd)
-        VALUES (%s, %s, %s, %s, %s, %s)
+        cursore = connessione.cursor(dictionary=True)
+        
+        # Controlla se l'email dell'utente esiste già nel database
+        query_check_email = "SELECT * FROM utenti WHERE email = %s"
+        cursore.execute(query_check_email, (utente.email,))
+        user = cursore.fetchone()
+        
+        if user:
+            return{"msg":"L'email è già registrata!"}
+        
+        # Inserimento dell'utente nel database
+        query_insert_user = """
+        INSERT INTO utenti (username, nome, cognome, email, telefono)
+        VALUES (%s, %s, %s, %s, %s)
         """
         parametri = (
             utente.username,
             utente.nome,
             utente.cognome,
             utente.email,
-            utente.telefono,
-            hashed_password.decode('utf-8')  # Store the hashed password as a string
+            utente.telefono
         )
-        cursore.execute(query, parametri)
+        cursore.execute(query_insert_user, parametri)
         connessione.commit()
-        id_utente = cursore.lastrowid
+        id_user = cursore.lastrowid
+        
+        # Recupera l'utente appena registrato
+        query_get_user = "SELECT * FROM utenti WHERE id_utente = %s"
+        cursore.execute(query_get_user, (id_user,))
+        user = cursore.fetchone()
+        
+        
     finally:
+        # Chiudi il cursore e la connessione
         cursore.close()
         connessione.close()
-    
-    return {"msg": "Registrazione eseguita con successo!","id_utente":id_utente,"status":True}
+        
+        if user:
+            return {"msg": "Registrazione eseguita con successo!", "utente": user,"status": True}
 
 @app.post("/api/v1/login")
 def login(utente: LoginUtente):
