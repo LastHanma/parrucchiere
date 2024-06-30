@@ -210,15 +210,16 @@ def registrazione(utente: RegistrazioneUtente):
         
         # Inserimento dell'utente nel database
         query_insert_user = """
-        INSERT INTO utenti (username, nome, cognome, email, telefono)
-        VALUES (%s, %s, %s, %s, %s)
+        INSERT INTO utenti (username, nome, cognome, email, telefono,pwd)
+        VALUES (%s, %s, %s, %s, %s,%s)
         """
         parametri = (
             utente.username,
             utente.nome,
             utente.cognome,
             utente.email,
-            utente.telefono
+            utente.telefono,
+            utente.pwd
         )
         cursore.execute(query_insert_user, parametri)
         connessione.commit()
